@@ -71,3 +71,12 @@ graph_database/.env
 .flutter-plugins
 android/.gradle/
 android/app/.cxx/
+
+# NodeJS
+node_modules/
+
+# File chứa mật khẩu
+.env
+
+# Log files
+*.log
