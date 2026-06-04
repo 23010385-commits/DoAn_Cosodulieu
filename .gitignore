@@ -53,9 +53,17 @@ app.*.map.json
 # 1. File cấu hình môi trường Android local (Tránh lỗi đường dẫn SDK giữa các máy)
 android/local.properties
 
-# 2. File bảo mật Firebase (KHÔNG ĐƯỢC PUSH)
+# 2. File bảo mật Firebase và Database (KHÔNG ĐƯỢC PUSH)
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+graph_database/serviceAccountKey.json
+graph_database/credentials.json
+graph_database/.venv/
+graph_database/.env
+.env
+
+
+
 
 # 3. Các file build của Android và thư viện sinh ra thêm
 .metadata
