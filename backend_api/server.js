@@ -10,10 +10,6 @@ app.get("/", (req, res) => {
     res.send("Book API Running");
 });
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
-
 const db = require("./config/db");
 
 app.get("/books", (req, res) => {
@@ -29,4 +25,13 @@ app.get("/books", (req, res) => {
         res.json(result);
     });
 
+});
+app.use(express.json());
+
+const bookRoutes = require("./routes/bookRoutes");
+
+app.use("/api/books", bookRoutes);
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
 });
