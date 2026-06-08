@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library & Recommendation Portal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+
+    <header class="app-header">
+        <div class="logo-area">
+            <div class="logo-icon">🧠</div>
+            <div class="logo-text">
+                <h1>Phenikaa Library</h1>
+                <span>Library & Recommendation Portal</span>
+            </div>
+        </div>
+        <div class="server-status">
+            <div class="status-indicator mysql-status" id="mysqlStatus">
+                <span class="dot"></span> MySQL API (Port 3000)
+            </div>
+            <div class="status-indicator neo4j-status" id="neoStatus">
+                <span class="dot"></span> Graph API (Port 5000)
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Tab navigation -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="booksTab" id="btnBooksTab">
+                <span class="icon">📚</span> Danh mục sách (MySQL)
+            </button>
+            <button class="tab-btn" data-tab="recommendTab" id="btnRecTab">
+                <span class="icon">⚡</span> Hệ gợi ý thông minh (Neo4j)
+            </button>
+        </nav>
+
+        <!-- Tab contents -->
+        <section class="tab-panels">
+            <!-- panel 1: Books Catalog -->
+            <div class="tab-panel active" id="booksTab">
+                <div class="panel-header">
+                    <h2>Kho sách thư viện</h2>
+                    <span class="badge" id="bookCountBadge">0 cuốn sách</span>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="booksTable">
+                        <thead>
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tiêu đề sách</th>
+                                <th>Năm xuất bản</th>
+                                <th>Nhà xuất bản</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <tr>
+                                <td colspan="4" class="text-center">Đang tải dữ liệu từ MySQL API...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- panel 2: Recommendations -->
+            <div class="tab-panel" id="recommendTab">
+                <div class="panel-header">
+                    <h2>Bộ não gợi ý cá nhân hóa</h2>
+                    <p class="subtitle">Nhập tên người dùng để chạy thuật toán Cypher tìm sách gợi ý trên đồ thị Neo4j</p>
+                </div>
+
+                <div class="search-box-container">
+                    <form id="recForm" class="search-form">
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="usernameInput" placeholder="Nhập tên tài khoản (ví dụ: admin, dung, Hello...)" required>
+                        </div>
+                        <button type="submit" class="submit-btn" id="btnGetRec">Chạy gợi ý</button>
+                    </form>
+                </div>
+
+                <div class="results-container">
+                    <div class="loading-spinner" id="recLoading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Đang duyệt đồ thị Neo4j...</p>
+                    </div>
+                    
+                    <div class="empty-state" id="recEmptyState">
+                        <div class="empty-icon">💡</div>
+                        <h3>Sẵn sàng phân tích</h3>
+                        <p>Hãy nhập tên tài khoản ở trên để chạy mô hình gợi ý sách cá nhân hóa.</p>
+                    </div>
+
+                    <div class="rec-results-wrapper" id="recResultsWrapper" style="display: none;">
+                        <h3 class="results-title">Kết quả phân tích cho người dùng: <span id="targetUserSpan" class="highlight"></span></h3>
+                        <div class="two-column-layout">
+                            <div class="results-column">
+                                <h4 class="column-title">📖 Sách đã đọc</h4>
+                                <div class="rec-grid" id="historyGrid">
+                                    <!-- Lịch sử đọc sách hiển thị ở đây -->
+                                </div>
+                            </div>
+                            <div class="results-column">
+                                <h4 class="column-title">✨ Sách gợi ý</h4>
+                                <div class="rec-grid" id="recGrid">
+                                    <!-- Sách gợi ý hiển thị ở đây -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Phenikaa University - Đồ án môn học Cơ sở dữ liệu</p>
+        <p class="author-info">Phát triển bởi: Minh Đức (Mobile) - Tấn Dũng (MySQL) - Trọng Tấn (Neo4j)</p>
+    </footer>
+
+    <!-- App Logic JS -->
+    <script src="app.js"></script>
+</body>
+</html>

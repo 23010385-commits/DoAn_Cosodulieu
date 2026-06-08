@@ -60,7 +60,9 @@ graph_database/serviceAccountKey.json
 graph_database/credentials.json
 graph_database/.venv/
 graph_database/.env
+backend_api/.env
 .env
+
 
 
 
